@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+      <p>Nome da música:</p>
+  <input type="text" id="input_musica" placeholder="Ex.: Bohemian Rhapsody">
+  <button onclick="cadastrar()">Cadastrar</button>
+  <br>
+
+  <button onclick="exibir()">Exibir</button>
+  <br>
+
+  <p>De: <input type="number" id="input_de"> 
+     Até: <input type="number" id="input_ate">
+     <button onclick="filtrar()">Filtrar</button>
+  </p>
+
+  <p id="resposta"></p>
+</body>
+</html>
+
+<script>
+    var musicas = [];
+
+    function cadastrar() {
+      var nome = input_musica.value;
+
+      musicas.push(nome);
+      input_musica.value = "";
+    }
+
+    function exibir() {
+
+      resposta.innerHTML = musicas.join("<br>");
+    }
+
+    function filtrar() {
+     var de = Number(input_de.value);
+     var ate = Number(input_ate.value);
+
+     var lista = "";
+        
+     for (var i = 0; i < musicas.length; i++) {
+        if (i + 1 >= de && i + 1 <= ate) {
+        lista += (i + 1) + ". " + musicas[i] + "<br>";
+        }
+    }
+    resposta.innerHTML = lista;
+}
+
+</script>

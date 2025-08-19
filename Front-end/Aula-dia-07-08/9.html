@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Escolha sua preferência:</p>
+  <select id="input_opcao">
+    <option value="Café">Café</option>
+    <option value="Chá">Chá</option>
+    <option value="Suco">Suco</option>
+  </select>
+  <br><br>
+
+  <button onclick="votar()">Votar</button>
+  <button onclick="verResultado()">Ver resultado</button>
+
+  <p id="resposta"></p>
+</body>
+</html>
+
+<script>
+    var votosCafe = 0;
+    var votosCha = 0;
+    var votosSuco = 0;
+
+    function votar() {
+      var escolha = input_opcao.value;
+
+      if (escolha === "Café") votosCafe++;
+      else if (escolha === "Chá") votosCha++;
+      else if (escolha === "Suco") votosSuco++;
+
+      resposta.innerHTML = `Você votou em ${escolha}!`;
+    }
+
+    function verResultado() {
+      var lista = "";
+      var maisVotada = "";
+      var maiorVoto = 0;
+
+      lista += "Café: " + votosCafe + " votos<br>";
+      lista += "Chá: " + votosCha + " votos<br>";
+      lista += "Suco: " + votosSuco + " votos<br>";
+
+      if (votosCafe >= votosCha && votosCafe >= votosSuco) {
+        maiorVoto = votosCafe;
+        maisVotada = "Café";
+      } else if (votosCha >= votosCafe && votosCha >= votosSuco) {
+        maiorVoto = votosCha;
+        maisVotada = "Chá";
+      } else {
+        maiorVoto = votosSuco;
+        maisVotada = "Suco";
+      }
+    
+        lista += `<br><b>${maisVotada} está ganhando com ${maiorVoto} votos!</b>`;
+      
+      resposta.innerHTML = lista;
+    }
+</script>

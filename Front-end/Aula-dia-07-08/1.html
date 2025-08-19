@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=b, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Informe o sabor da pizza</p>
+    <input type="text" id="input_sabor">
+    <br>
+    <p>Informe o preço da pizza</p>
+    <input type="number" id="input_preco">
+    <p>Quantidade de amigos</p>
+    <input type="number" id="input_amigos"> 
+    <br> <br>
+    <button onclick="verValor()">Ver valor por amigo</button>
+    <br>
+    <br>
+    <p id="resposta"></p>
+</body>
+</html>
+
+<script>
+    function verValor(){
+        var saborPizza = input_sabor.value;
+        var preco = Number(input_preco.value)
+        var qtd = Number(input_amigos.value)
+
+        var final = (preco/qtd) * 1.10;
+        
+        resposta.innerHTML = `Cada amigo vai colaborar com R$${final.toFixed(2)} para a pizza de ${saborPizza}  `
+        
+    }
+
+
+</script>

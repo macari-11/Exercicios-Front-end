@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Nome do aluno:</p>
+  <input type="text" id="input_nome" placeholder="Ex.: João">
+  
+  <p>Idade:</p>
+  <input type="number" id="input_idade" min="1" placeholder="Ex.: 18">
+  <br><br>
+
+  <button onclick="cadastrar()">Cadastrar</button>
+  <button onclick="exibirTodos()">Exibir todos</button>
+  <br><br>
+
+  <p>Filtrar por idade:</p>
+  De: <input type="number" id="input_de" min="0" style="width: 50px;">
+  Até: <input type="number" id="input_ate" min="0" style="width: 50px;">
+  <button onclick="filtrarIdade()">Filtrar por idade</button>
+  <br><br>
+
+  <p id="resposta"></p>
+</body>
+</html>
+
+<script>
+    var alunos = [];
+
+    function cadastrar() {
+      var nome = input_nome.value;
+      var idade = Number(input_idade.value);
+
+      alunos.push({ nome: nome, idade: idade });
+      input_nome.value = "";
+      input_idade.value = "";
+    }
+
+    function exibirTodos() {
+      var lista = "";
+
+      for (var i = 0; i < alunos.length; i++) {
+        lista += (i + 1) + ". " + alunos[i].nome + " - " + alunos[i].idade + " anos<br>";
+      }
+      resposta.innerHTML = lista;
+    }
+
+    function filtrarIdade() {
+      var de = Number(input_de.value);
+      var ate = Number(input_ate.value);
+
+      var lista = "";
+      for (var i = 0; i < alunos.length; i++) {
+        if (alunos[i].idade >= de && alunos[i].idade <= ate) {
+          lista += (i + 1) + ". " + alunos[i].nome + " - " + alunos[i].idade + " anos<br>";
+        }
+      }
+
+      resposta.innerHTML = lista;
+    }
+</script>

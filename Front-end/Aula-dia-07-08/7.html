@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Nova tarefa:</p>
+  <input type="text" id="input_tarefa" placeholder="Ex.: Comprar pão">
+  
+  <p>Status:</p>
+  <select id="input_status">
+    <option value="Pendente">Pendente</option>
+    <option value="Concluída">Concluída</option>
+  </select>
+  <br><br>
+
+  <button onclick="adicionar()">Adicionar tarefa</button>
+  <button onclick="filtrar()">Exibir todas</button>
+  <button onclick="filtrar('Pendente')">Ver somente pendentes</button>
+  <button onclick="filtrar('Concluida')">Ver somente concluídas</button>
+
+  <p id="resposta"></p>
+</body>
+</html>
+
+<script>
+    var tarefas = [];
+
+    function adicionar() {
+      var nome = input_tarefa.value;
+      var status = input_status.value;
+
+      tarefas.push({ nome: nome, status: status });
+      input_tarefa.value = "";
+    }
+
+    function filtrar (status){
+      var lista = "";
+
+        if(status = ''){
+          for (var i = 0; i < tarefas.length; i++) {
+          lista += (i + 1) + ". " + tarefas[i].nome + " - " + tarefas[i].status + "<br>";
+          return;
+      }
+        }
+        for (var i = 0; i < tarefas.length; i++) {
+        if (tarefas[i].status == status) {
+          lista += (i + 1) + ". " + tarefas[i].nome + " - " + tarefas[i].status + "<br>";
+        }
+      }
+      resposta.innerHTML = lista;
+
+    }
+</script>
