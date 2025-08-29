@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>Nome do item</div>
+    <input type="text" id="input_nome">
+    <div>Quantidade de itens</div>
+    <input type="text" id="input_quantidade">
+    <br>
+    <button onclick="adicionar()">Adicionar a lista</button>
+    <button onclick="exibir()">Exibir lista</button>
+    <div id="div_resposta"></div>
+</body>
+</html>
+<script>
+    const lista = [];
+
+    function adicionar(){
+        var nome = input_nome.value;
+        var quantidade = Number(input_quantidade.value);
+
+        lista.push({
+            nome: nome,
+            quantidade: quantidade
+        });
+        div_resposta.innerHTML = "";
+        div_resposta.innerHTML = `${quantidade}x de ${nome} adicionado com sucesso!`;
+    }
+
+    function exibir(){
+        div_resposta.innerHTML = "";
+        lista.forEach((elemento)=> div_resposta.innerHTML+= `${elemento.quantidade}x de ${elemento.nome}<br>`);
+    }
+</script>

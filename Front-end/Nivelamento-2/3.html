@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Nome do Jogo:
+    <input type="text" id="input_nome">
+    <br>
+    Pontuação do Jogo:
+    <input type="text" id="input_pontuacao">
+    <br>
+    <button onclick="adicionar()">Adicionar</button>
+    <button onclick="mostrar()">Mostrar ranking</button>
+    <div id="div_resposta"></div>
+</body>
+</html>
+<script>
+    const jogos = [];
+
+    function adicionar(){
+        var nomeJogo = input_nome.value;
+        var pontuacaoJogo = Number(input_pontuacao.value);
+        
+        jogos.push({
+            nome: nomeJogo,
+            pontuacao: pontuacaoJogo
+        });
+    }
+
+    function mostrar(){
+        jogos.sort((a,b)=> b.pontuacao-a.pontuacao)
+        .forEach((element)=>div_resposta.innerHTML += `Jogo: ${element.nome}  Nota: ${element.pontuacao} <br>`)
+
+        var maiorNota = jogos.sort((a,b)=> b.pontuacao-a.pontuacao).at(0);
+        
+        div_resposta.innerHTML += `Jogo com a maior Nota: ${maiorNota.nome}`
+    }
+</script>
