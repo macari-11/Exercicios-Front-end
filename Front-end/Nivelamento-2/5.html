@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    informe o nome do exercicio
+    <input type="text" id="input_produto">
+    Informe a quantidade de repetições
+    <input type="text" id="input_quantidade">
+    <br>
+    <button onclick="adicionar()">adicionar</button>
+    <button onclick="exibir()">filtrar</button>
+    <input type="text" id="input_filtro">
+    <div id="div_resposta"></div>
+</body>
+</html>
+
+<script>
+    const produto = [];
+
+    function adicionar(){
+        produto.push({
+            produto: input_produto.value,
+            quantidade: input_quantidade.value
+        });
+        div_resposta.innerHTML = `${input_produto.value} cadastrado com sucesso`;
+    }
+
+    function exibir(){
+        var filtro = input_filtro.value;
+        div_resposta.innerHTML = "";
+
+        produto.filter((element)=> element.quantidade = filtro)
+        .forEach((element)=> div_resposta.innerHTML+= 
+        `Nome produto: ${element.produto}, Quantidade: ${element.quantidade} <br>`);
+    }
+</script>

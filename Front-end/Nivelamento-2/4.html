@@ -6,30 +6,35 @@
     <title>Document</title>
 </head>
 <body>
-    informe o titulo do livro
-    <input type="text" id="input_titulo">
-    Informe o autor
-    <input type="text" id="input_autor">
+    informe o produto
+    <input type="text" id="input_produto">
+    Informe a quantidade no estoque
+    <input type="text" id="input_quantidade">
     <br>
-    <button onclick="cadastrar()">Cadastrar</button>
-    <button onclick="exibir()">Exibir livros</button>
+    <button onclick="adicionar()">adicionar</button>
+    <button onclick="exibir()">filtrar</button>
+    <input type="text" id="input_filtro">
     <div id="div_resposta"></div>
 </body>
 </html>
 
 <script>
-    const livros = [];
+    const produto = [];
 
-    function cadastrar(){
-        livros.push({
-            titulo: input_titulo.value,
-            autor: input_autor.value
+    function adicionar(){
+        produto.push({
+            produto: input_produto.value,
+            quantidade: input_quantidade.value
         });
-        div_resposta.innerHTML = `${input_titulo.value} cadastrado com sucesso`;
+        div_resposta.innerHTML = `${input_produto.value} cadastrado com sucesso`;
     }
 
     function exibir(){
-        div_resposta.innerHTML = ""
-        livros.forEach((element)=> div_resposta.innerHTML+= `Nome livro: ${element.titulo}, Autor: ${element.autor} <br>`);
+        var filtro = input_filtro.value;
+        div_resposta.innerHTML = "";
+
+        produto.filter((element)=> element.quantidade < filtro)
+        .forEach((element)=> div_resposta.innerHTML+= 
+        `Nome produto: ${element.produto}, Quantidade: ${element.quantidade} <br>`);
     }
 </script>
