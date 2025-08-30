@@ -6,6 +6,38 @@
     <title>Document</title>
 </head>
 <body>
-    
+    Informe o peso:
+    <input type="text" id="input_peso">
+    <br>
+    Informe o dia:
+    <input type="text" id="input_dia">
+    <br>
+    <button onclick="adicionar()">Adicionar Peso</button>
+    <button onclick="historico()">Exibir Historico</button>
+    <button onclick="media()">Calcular media</button>
+    <br>
+    <div id="div_resposta"></div>
 </body>
-</html>""
+</html>
+<script>
+    const pesos = [];
+
+    function adicionar(){
+        pesos.push({
+            peso: Number(input_peso.value),
+            dia: input_dia.value
+        });
+        div_resposta.innerHTML = `Peso do dia ${input_dia.value} adicionado`
+    }
+
+    function historico(){
+        div_resposta.innerHTML = "";
+        pesos.forEach((element)=> 
+        div_resposta.innerHTML += `Dia ${element.dia}, Peso: ${element.peso}<br>`)
+    }
+
+    function media(){
+        let pesoTotal = pesos.reduce((somador,pesoAtual)=> (somador + pesoAtual.peso),0) / pesos.length ;
+        div_resposta.innerHTML = `Media de peso: ${pesoTotal}`;
+    }
+</script>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    Nome do produto:
+    <input type="text" id="input_nome">
+    <br>
+    Preço do produto:
+    <input type="" id="input_preco">
+    <br>
+    Quantidade em estoque:
+    <input type="" id="input_estoque">
+    <br>
+    <button onclick="cadastrar()">Cadastrar</button>
+    <br>
+    Informe o valor do filtro:
+    <input type="text" id="input_filtro">
+    <button onclick="promocao()">Olha itens promoção</button>
+    <br>
+    <button onclick="estoque()">Calcular estoque</button>
+    <div id="div_resposta"></div>
+
+</body>
+</html>
+
+<script>
+
+    const produtos = [];
+
+    function cadastrar(){
+        produtos.push({
+            nome: input_nome.value,
+            preco: Number(input_preco.value),
+            quantidade: Number(input_estoque.value)
+        });
+        div_resposta.innerHTML = ` O Produto: ${input_nome.value} foi cadastrado`;
+    }
+
+    function promocao(){
+        div_resposta.innerHTML = "";
+        let filtro = Number(input_filtro.value);
+
+        produtos
+        .filter((element)=> element.preco < filtro )
+        .sort((a,b)=> b.preco - a.preco)
+        .map((element)=> `Produto: ${element.nome}, Preço: ${element.preco * 0.9}, Estoque: ${element.quantidade}`)
+        .forEach((element)=> div_resposta.innerHTML += element)
+    }
+
+    function estoque(){
+        let total = produtos.reduce((somador, element)=> somador + (element.preco * element.quantidade),0)
+        div_resposta.innerHTML = `Valor total do estoque: ${total}`;
+    }
+</script>

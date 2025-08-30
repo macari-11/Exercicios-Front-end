@@ -6,8 +6,52 @@
     <title>Document</title>
 </head>
 <body>
+    Nome do filme:
+    <input type="text" id="input_nome">
+    <br>
+    Genero do filme:
+    <input type="text" id="input_genero">
+    <br>
+    Nota do filme:
+    <input type="text" id="input_nota">
+    <br>
+    <button onclick="cadastrar()">Cadastrar filme</button>
+    <br>
+    <button onclick="filmesAcao()">Top filmes ação</button>
+    <br>
+    <div id="div_resposta"></div>
 
-    <!-- Crescente a-b decrecente b- a -->
-    
 </body>
 </html>
+
+<script>
+
+    const filmes = [];
+
+    function cadastrar(){
+        filmes.push({
+            nome: input_nome.value,
+            genero: input_genero.value,
+            nota: Number(input_nota.value)
+        });
+
+        div_resposta.innerHTML = `O filme ${input_nome.value}, foi adicionado a lista `;
+    }
+
+    function filmesAcao(){
+        div_resposta.innerHTML = "";
+        let filmesFiltrados = filmes.filter((filme)=> filme.genero == "Ação")
+        .sort((a,b)=> b.nota - a.nota )
+        .slice(0,5);
+
+        filmesFiltrados.map((element)=> `Filme: ${element.nome} | Nota: ${element.nota} <br>`)
+        .forEach((element) => div_resposta.innerHTML += element);
+
+        let media = filmesFiltrados.reduce((somador, element)=> somador + element.nota,0) / filmesFiltrados.length;
+
+        div_resposta.innerHTML +=`A média dos filmes de Ação é ${media}`
+    }
+
+
+
+</script>

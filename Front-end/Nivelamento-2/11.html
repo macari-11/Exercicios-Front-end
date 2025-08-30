@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Nome aluno:
+    <input type="text" id="input_nome">
+    <br>
+    Nota aluno:
+    <input type="text" id="input_nota">
+    <br>
+    <button onclick="cadastrar()">Cadastrar Nota</button>
+    <button onclick="exibir()">Exibir aprovados</button>
+    <br>
+    <div id="div_resposta"></div>
+</body>
+</html>
+
+<script>
+    const notas = [];
+
+    function cadastrar(){
+        notas.push({
+            nome: input_nome.value,
+            nota: Number(input_nota.value)
+        });
+        div_resposta.innerHTML = `Aluno: ${input_nome.value} teve a nota cadastrada`
+    }
+
+    function exibir(){
+        div_resposta.innerHTML= "";
+        let notasFiltradas = notas.filter((elemento)=> elemento.nota >=6);
+        
+        notasFiltradas.sort((a,b)=> b.nota - a.nota)
+        .map(aluno => `Aluno: ${aluno.nome}, nota: ${aluno.nota}`)
+        .forEach((element)=> div_resposta.innerHTML += `${element} <br>`);
+
+        let media = notasFiltradas
+        .reduce((somador, notaVez)=> somador + notaVez.nota, 0) / notasFiltradas.length;
+
+        div_resposta.innerHTML += `Media das notas aprovadas: ${media}`;
+    }
+</script>

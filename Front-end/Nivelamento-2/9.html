@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Informe o nome do filme
+    <input type="" id="input_nome">
+    Informe o genero
+    <input type="text" id="input_genero">
+    <br>
+    <button onclick="cadastrar()">Cadastrar Filme</button>
+    <br>
+    Filtrar por genero
+    <input type="text" id="input_filtro_genero">
+    <button onclick="filtrar()">Filtrar por genero</button>
+    <br>
+    <div id="div_resposta"></div>
+</body>
+</html>
+
+<script>
+    const filmes = [];
+
+    function cadastrar(){
+        filmes.push({
+            nome:input_nome.value,
+            genero:input_genero.value
+        });
+        div_resposta.innerHTML= `${input_nome.value} cadastrado com sucesso.`
+    }
+
+    function filtrar(){
+        let filtro = input_filtro_genero.value;
+        div_resposta.innerHTML="";
+        filmes.filter((element)=>element.genero === filtro)
+        .forEach((element)=> div_resposta.innerHTML+=`Filme: ${element.nome}, genero: ${element.genero}`)
+    }
+</script>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Votação de Atividades</title>
+</head>
+<body>
+    Selecione sua atividade favorita:
+    <select id="input_atividade">
+        <option value="Corrida">Corrida</option>
+        <option value="Natação">Natação</option>
+        <option value="Yoga">Yoga</option>
+        <option value="Ciclismo">Ciclismo</option>
+    </select>
+    <button onclick="votar()">Votar</button>
+    <br><br>
+    <button onclick="resultado()">Resultado</button>
+    <br><br>
+    <div id="div_resposta"></div>
+
+    <script>
+        const votos = [];
+
+        function votar(){
+            votos.push(input_atividade.value);
+            div_resposta.innerHTML = `voto para ${input_atividade.value} `;
+        }
+
+        function resultado(){
+            div_resposta.innerHTML = "";
+
+            let contagem = [];
+            votos.forEach(atividade => {
+                let obj = contagem.filter(a => a.atividade === atividade)[0];
+                obj ? obj.qtde++ : contagem.push({atividade, qtde:1});
+            });
+
+            
+            contagem.forEach(obj => div_resposta.innerHTML += `${obj.atividade}: ${obj.qtde} voto(s)<br>`);
+
+            
+            let campeao = contagem.reduce((maximo, atividade) => atividade.qtde > maximo.qtde ? atividade : maximo, {atividade:"", qtde:0});
+            div_resposta.innerHTML += `<br> Atividade mais votada:${campeao.atividade} com ${campeao.qtde} votos`;
+        }
+    </script>
+</body>
+</html>
