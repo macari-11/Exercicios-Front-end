@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    informe a receita
+    <input type="text" id="input_receita">
+    Informe o tempo de preparo
+    <input type="text" id="input_tempo_preparo">
+    <br>
+    <button onclick="adicionar()">adicionar</button>
+    <button onclick="exibir()">filtrar</button>
+    <input type="text" id="input_filtro">
+    <div id="div_resposta"></div>
+</body>
+</html>
+
+<script>
+    const receita = [];
+
+    function adicionar(){
+        receita.push({
+            receita: input_receita.value,
+            tempo: input_tempo_preparo.value
+        });
+        div_resposta.innerHTML = `${input_receita.value} cadastrado com sucesso`;
+    }
+
+    function exibir(){
+        var filtro = input_filtro.value;
+        div_resposta.innerHTML = "";
+
+        receita.filter((element)=> element.tempo <=filtro)
+        .forEach((element)=> div_resposta.innerHTML+= 
+        `Nome receita: ${element.receita}, tempo: ${element.tempo} <br>`);
+    }
+</script>

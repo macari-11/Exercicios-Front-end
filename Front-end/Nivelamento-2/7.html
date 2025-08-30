@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    informe o nome
+    <input type="text" id="input_nome">
+    Informe o telefone
+    <input type="text" id="input_telefone">
+    <br>
+    <button onclick="adicionar()">adicionar</button>
+    <button onclick="exibir()">Exibir contatos</button>
+    <button onclick="excluir()">excluir</button>
+    <input type="text" id="input_filtro">
+    <div id="div_resposta"></div>
+</body>
+</html>
+
+<script>
+    const contato = [];
+
+    function adicionar(){
+        contato.push({
+            nome: input_nome.value,
+            telefone: input_telefone.value
+        });
+        div_resposta.innerHTML = `${input_nome.value} cadastrado com sucesso`;
+    }
+
+    function exibir(){
+        var filtro = input_filtro.value;
+        div_resposta.innerHTML = "";
+
+        contato.toSorted((a,b)=> a.nome.localeCompare(b.nome))
+        .forEach((element)=> div_resposta.innerHTML+= 
+        `Nome nome: ${element.nome}, telefone: ${element.telefone} <br>`);
+    }
+
+    function excluir(){
+        var filtro = input_filtro.value;
+
+        contatoIndex = contato.findIndex(e => e.nome === filtro);
+        contato.splice(contatoIndex, 1);
+        
+        div_resposta.innerHTML = "";
+        div_resposta.innerHTML = `${filtro} excluído com sucesso`;
+    }
+</script>
